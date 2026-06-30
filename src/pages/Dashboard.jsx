@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUsers } from '../redux/usersSlice'
 import api from '../services/api'
 import Loader from '../components/Loader'
 import UserCard from '../components/UserCard'
 import SearchBar from '../components/SearchBar'
+import FilterDropdown from '../components/FilterDropdown'
 
 function Dashboard() {
   const dispatch = useDispatch()
@@ -12,6 +13,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
+  const [selectedCompany, setSelectedCompany] = useState('')
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -29,9 +31,16 @@ function Dashboard() {
     fetchUsers()
   }, [dispatch])
 
-  const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const companies = useMemo(() => {
+    const uniqueCompanies = [...new Set(users.map(user => user.company.name))]
+    return uniqueCompanies.sort()
+  }, [users])
+
+  const filteredUsers = users.filter(user => {
+    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesCompany = selectedCompany === '' || user.company.name === selectedCompany
+    return matchesSearch && matchesCompany
+  })
 
   if (loading) {
     return (
@@ -64,8 +73,13 @@ function Dashboard() {
           <p className="text-gray-600 mt-1">Manage and explore your user directory</p>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           <SearchBar value={searchTerm} onChange={setSearchTerm} />
+          <FilterDropdown 
+            value={selectedCompany} 
+            onChange={setSelectedCompany}
+            options={companies}
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
