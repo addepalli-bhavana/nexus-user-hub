@@ -1,11 +1,12 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUsers } from '../redux/usersSlice'
+import { setUsers, addUser } from '../redux/usersSlice'
 import api from '../services/api'
 import Loader from '../components/Loader'
 import UserCard from '../components/UserCard'
 import SearchBar from '../components/SearchBar'
 import FilterDropdown from '../components/FilterDropdown'
+import CreateUserModal from '../components/CreateUserModal'
 
 function Dashboard() {
   const dispatch = useDispatch()
@@ -14,6 +15,7 @@ function Dashboard() {
   const [error, setError] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCompany, setSelectedCompany] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -41,6 +43,10 @@ function Dashboard() {
     const matchesCompany = selectedCompany === '' || user.company.name === selectedCompany
     return matchesSearch && matchesCompany
   })
+
+  const handleAddUser = (newUser) => {
+    dispatch(addUser(newUser))
+  }
 
   if (loading) {
     return (
@@ -85,7 +91,10 @@ function Dashboard() {
                 options={companies}
               />
             </div>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm whitespace-nowrap">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm whitespace-nowrap"
+            >
               + Add User
             </button>
           </div>
@@ -109,6 +118,12 @@ function Dashboard() {
           )}
         </div>
       </div>
+
+      <CreateUserModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAddUser={handleAddUser}
+      />
     </div>
   )
 }
