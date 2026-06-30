@@ -19,7 +19,7 @@ function UserCard({ user }) {
   return (
     <div 
       onClick={handleClick}
-      className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+      className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm hover:shadow-lg transition-all duration-200 cursor-pointer hover:scale-[1.02]"
     >
       <div className="flex items-start space-x-4">
         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0">
