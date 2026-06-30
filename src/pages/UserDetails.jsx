@@ -77,8 +77,59 @@ function UserDetails() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <p className="text-gray-500">Additional details will appear here</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Company</h2>
+            
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs text-gray-500 uppercase mb-1">Company Name</p>
+                <p className="font-medium text-gray-900">{user.company.name}</p>
+              </div>
+              
+              {user.company.catchPhrase && (
+                <div>
+                  <p className="text-xs text-gray-500 uppercase mb-1">Catchphrase</p>
+                  <p className="text-gray-700 italic">"{user.company.catchPhrase}"</p>
+                </div>
+              )}
+              
+              {user.company.bs && (
+                <div>
+                  <p className="text-xs text-gray-500 uppercase mb-1">Business</p>
+                  <p className="text-gray-700">{user.company.bs}</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Address</h2>
+            
+            <div className="space-y-3">
+              {user.address && (
+                <>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase mb-1">Street</p>
+                    <p className="font-medium text-gray-900">
+                      {user.address.street}
+                      {user.address.suite && `, ${user.address.suite}`}
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase mb-1">City</p>
+                    <p className="text-gray-700">{user.address.city}</p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase mb-1">Zipcode</p>
+                    <p className="text-gray-700">{user.address.zipcode}</p>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
