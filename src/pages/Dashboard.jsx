@@ -4,12 +4,14 @@ import { setUsers } from '../redux/usersSlice'
 import api from '../services/api'
 import Loader from '../components/Loader'
 import UserCard from '../components/UserCard'
+import SearchBar from '../components/SearchBar'
 
 function Dashboard() {
   const dispatch = useDispatch()
   const users = useSelector(state => state.users.users)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -26,6 +28,10 @@ function Dashboard() {
 
     fetchUsers()
   }, [dispatch])
+
+  const filteredUsers = users.filter(user =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   if (loading) {
     return (
@@ -58,8 +64,12 @@ function Dashboard() {
           <p className="text-gray-600 mt-1">Manage and explore your user directory</p>
         </div>
 
+        <div className="mb-6">
+          <SearchBar value={searchTerm} onChange={setSearchTerm} />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {users.map(user => (
+          {filteredUsers.map(user => (
             <UserCard key={user.id} user={user} />
           ))}
         </div>
