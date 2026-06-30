@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setUsers } from '../redux/usersSlice'
 import api from '../services/api'
 import Loader from '../components/Loader'
+import UserCard from '../components/UserCard'
 
 function Dashboard() {
   const dispatch = useDispatch()
+  const users = useSelector(state => state.users.users)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -56,8 +58,10 @@ function Dashboard() {
           <p className="text-gray-600 mt-1">Manage and explore your user directory</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <p className="text-gray-500">User cards</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {users.map(user => (
+            <UserCard key={user.id} user={user} />
+          ))}
         </div>
       </div>
     </div>
