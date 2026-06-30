@@ -100,8 +100,8 @@ function CreateUserModal({ isOpen, onClose, onAddUser }) {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                    errors.name ? 'border-red-300' : 'border-gray-300'
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    errors.name ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="John Doe"
                 />
@@ -118,8 +118,8 @@ function CreateUserModal({ isOpen, onClose, onAddUser }) {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                    errors.email ? 'border-red-300' : 'border-gray-300'
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    errors.email ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="john@example.com"
                 />
@@ -136,8 +136,8 @@ function CreateUserModal({ isOpen, onClose, onAddUser }) {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                    errors.phone ? 'border-red-300' : 'border-gray-300'
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    errors.phone ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="123-456-7890"
                 />
@@ -154,8 +154,8 @@ function CreateUserModal({ isOpen, onClose, onAddUser }) {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                    errors.company ? 'border-red-300' : 'border-gray-300'
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    errors.company ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Company Inc."
                 />
@@ -168,14 +168,14 @@ function CreateUserModal({ isOpen, onClose, onAddUser }) {
             <button
               type="button"
               onClick={handleSubmit}
-              className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm"
+              className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium text-sm transition-colors"
             >
               Create User
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="mt-3 sm:mt-0 w-full sm:w-auto px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium text-sm"
+              className="mt-3 sm:mt-0 w-full sm:w-auto px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium text-sm transition-colors"
             >
               Cancel
             </button>
