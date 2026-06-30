@@ -126,6 +126,23 @@ function UserDetails() {
                     <p className="text-xs text-gray-500 uppercase mb-1">Zipcode</p>
                     <p className="text-gray-700">{user.address.zipcode}</p>
                   </div>
+
+                  {user.address.geo && (
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase mb-1">Coordinates</p>
+                      <p className="text-gray-700 font-mono text-sm">
+                        <span className="inline-flex items-center">
+                          <span className="text-gray-500 mr-1">Lat:</span>
+                          {user.address.geo.lat}
+                        </span>
+                        <span className="mx-2 text-gray-400">|</span>
+                        <span className="inline-flex items-center">
+                          <span className="text-gray-500 mr-1">Lng:</span>
+                          {user.address.geo.lng}
+                        </span>
+                      </p>
+                    </div>
+                  )}
                 </>
               )}
             </div>
