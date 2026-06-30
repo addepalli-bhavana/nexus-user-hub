@@ -73,11 +73,15 @@ function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Welcome back</h1>
-          <p className="text-gray-600 mt-1">Manage and explore your user directory</p>
+        {/* Modern Welcome Section */}
+        <div className="mb-8">
+          <div className="flex items-center space-x-3 mb-2">
+            <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full" />
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Welcome back</h1>
+          </div>
+          <p className="text-gray-600 ml-7">Manage and explore your user directory</p>
         </div>
 
         <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
