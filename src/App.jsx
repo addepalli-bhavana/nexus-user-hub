@@ -1,9 +1,13 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 function App() {
   return (
-    <div>
-      <h1>Nexus User Hub</h1>
-      <p>A modern user dashboard application</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<div>Dashboard Page</div>} />
+        <Route path="/users/:id" element={<div>User Details Page</div>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
