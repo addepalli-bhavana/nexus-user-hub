@@ -73,13 +73,22 @@ function Dashboard() {
           <p className="text-gray-600 mt-1">Manage and explore your user directory</p>
         </div>
 
-        <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <SearchBar value={searchTerm} onChange={setSearchTerm} />
-          <FilterDropdown 
-            value={selectedCompany} 
-            onChange={setSelectedCompany}
-            options={companies}
-          />
+        <div className="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <div className="w-full sm:w-96">
+            <SearchBar value={searchTerm} onChange={setSearchTerm} />
+          </div>
+          <div className="flex gap-3 w-full sm:w-auto">
+            <div className="w-full sm:w-64">
+              <FilterDropdown 
+                value={selectedCompany} 
+                onChange={setSelectedCompany}
+                options={companies}
+              />
+            </div>
+            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm whitespace-nowrap">
+              + Add User
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
