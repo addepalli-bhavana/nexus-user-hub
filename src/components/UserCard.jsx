@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom'
+
 function UserCard({ user }) {
+  const navigate = useNavigate()
+
   const getInitials = (name) => {
     return name
       .split(' ')
@@ -8,8 +12,15 @@ function UserCard({ user }) {
       .slice(0, 2)
   }
 
+  const handleClick = () => {
+    navigate(`/users/${user.id}`)
+  }
+
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+    <div 
+      onClick={handleClick}
+      className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+    >
       <div className="flex items-start space-x-4">
         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0">
           <span className="text-white font-semibold text-sm">
