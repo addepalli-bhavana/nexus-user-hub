@@ -1,12 +1,13 @@
 import { useState } from 'react'
 
-function CreateUserModal({ isOpen, onClose }) {
+function CreateUserModal({ isOpen, onClose, onAddUser }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     company: ''
   })
+  const [errors, setErrors] = useState({})
 
   if (!isOpen) return null
 
@@ -15,6 +16,56 @@ function CreateUserModal({ isOpen, onClose }) {
       ...formData,
       [e.target.name]: e.target.value
     })
+    if (errors[e.target.name]) {
+      setErrors({
+        ...errors,
+        [e.target.name]: ''
+      })
+    }
+  }
+
+  const validateForm = () => {
+    const newErrors = {}
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required'
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email is invalid'
+    }
+    
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone is required'
+    }
+    
+    if (!formData.company.trim()) {
+      newErrors.company = 'Company is required'
+    }
+    
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = () => {
+    if (validateForm()) {
+      const newUser = {
+        id: Date.now(),
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: {
+          name: formData.company
+        }
+      }
+      
+      onAddUser(newUser)
+      setFormData({ name: '', email: '', phone: '', company: '' })
+      setErrors({})
+      onClose()
+    }
   }
 
   return (
@@ -49,9 +100,12 @@ function CreateUserModal({ isOpen, onClose }) {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                    errors.name ? 'border-red-300' : 'border-gray-300'
+                  }`}
                   placeholder="John Doe"
                 />
+                {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
               </div>
 
               <div>
@@ -64,9 +118,12 @@ function CreateUserModal({ isOpen, onClose }) {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                    errors.email ? 'border-red-300' : 'border-gray-300'
+                  }`}
                   placeholder="john@example.com"
                 />
+                {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
               </div>
 
               <div>
@@ -79,9 +136,12 @@ function CreateUserModal({ isOpen, onClose }) {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                    errors.phone ? 'border-red-300' : 'border-gray-300'
+                  }`}
                   placeholder="123-456-7890"
                 />
+                {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
               </div>
 
               <div>
@@ -94,9 +154,12 @@ function CreateUserModal({ isOpen, onClose }) {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                    errors.company ? 'border-red-300' : 'border-gray-300'
+                  }`}
                   placeholder="Company Inc."
                 />
+                {errors.company && <p className="mt-1 text-sm text-red-600">{errors.company}</p>}
               </div>
             </div>
           </div>
@@ -104,6 +167,7 @@ function CreateUserModal({ isOpen, onClose }) {
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-3">
             <button
               type="button"
+              onClick={handleSubmit}
               className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm"
             >
               Create User
