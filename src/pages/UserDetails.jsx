@@ -42,8 +42,8 @@ function UserDetails() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="mb-4 sm:mb-6">
           <button 
             onClick={() => navigate('/')}
             className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center"
@@ -55,19 +55,19 @@ function UserDetails() {
           </button>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-          <div className="flex items-start space-x-6">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold text-2xl">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:space-x-6 space-y-4 sm:space-y-0">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0">
+              <span className="text-white font-bold text-xl sm:text-2xl">
                 {getInitials(user.name)}
               </span>
             </div>
 
-            <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900">{user.name}</h1>
-              <p className="text-gray-500 text-lg mt-1">@{user.username}</p>
+            <div className="flex-1 w-full">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{user.name}</h1>
+              <p className="text-gray-500 text-base sm:text-lg mt-1">@{user.username}</p>
 
-              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="flex items-center text-gray-700">
                   <span className="mr-2">✉️</span>
                   <div>
@@ -98,9 +98,9 @@ function UserDetails() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Company</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Company</h2>
             
             <div className="space-y-3">
               <div>
@@ -124,8 +124,8 @@ function UserDetails() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Address</h2>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Address</h2>
             
             <div className="space-y-3">
               {user.address && (
