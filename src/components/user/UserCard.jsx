@@ -1,17 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { HiMail, HiPhone, HiArrowRight } from 'react-icons/hi'
+import { getInitials } from '../../utils/helpers'
 
 function UserCard({ user }) {
   const navigate = useNavigate()
-
-  const getInitials = (name) => {
-    return name
-      .split(' ')
-      .map(word => word[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2)
-  }
 
   const handleClick = () => {
     navigate(`/users/${user.id}`)

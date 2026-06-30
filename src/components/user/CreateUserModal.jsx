@@ -1,7 +1,11 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { HiX } from 'react-icons/hi'
+import { addUser } from '../../redux/usersSlice'
+import { generateUserId } from '../../utils/helpers'
 
-function CreateUserModal({ isOpen, onClose, onAddUser }) {
+function CreateUserModal({ isOpen, onClose }) {
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -53,7 +57,7 @@ function CreateUserModal({ isOpen, onClose, onAddUser }) {
   const handleSubmit = () => {
     if (validateForm()) {
       const newUser = {
-        id: Date.now(),
+        id: generateUserId(),
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -62,7 +66,7 @@ function CreateUserModal({ isOpen, onClose, onAddUser }) {
         }
       }
       
-      onAddUser(newUser)
+      dispatch(addUser(newUser))
       setFormData({ name: '', email: '', phone: '', company: '' })
       setErrors({})
       onClose()
