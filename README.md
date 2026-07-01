@@ -2,7 +2,7 @@
 
 ## 🌐 Live Demo
 
-**Deployed Link:** [https://your-app-name.vercel.app](https://your-app-name.vercel.app)
+**Deployed Link:** [https://nexus-user-hub.netlify.app/](https://nexus-user-hub.netlify.app/)
 
 ---
 
