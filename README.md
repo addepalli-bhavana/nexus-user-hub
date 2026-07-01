@@ -76,7 +76,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone repo-link
+   git clone https://github.com/addepalli-bhavana/nexus-user-hub.git
    cd nexus-user-hub
    ```
 
